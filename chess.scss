@@ -1,0 +1,62 @@
+@import "var";
+@import "mixin";
+
+.box {
+  width: $width;
+  height: $width;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+  @include positionMiddle;
+
+  .heng {
+    @include position;
+    display: block;
+    float: left;
+    width: $line;
+    height: 1px;
+    background-color: red;
+    left: -2000px;
+    animation: leftMove 1s 1 ease-in forwards;
+
+  }
+
+  .shu {
+    @include position;
+    display: block;
+    width: 1px;
+    height: $line;
+    background-color: red;
+    top: -2000px;
+    animation: topMove 1s 1 ease-in forwards;
+
+  }
+}
+
+@for $i from 1 through $number {
+  .heng:nth-of-type(#{$i}) {
+    top: (2 * $i - 1) * $radius;
+    animation-delay: $i * 100ms;
+  }
+  .shu:nth-of-type(#{$i}) {
+    left: (2 * $i - 1) * $radius;
+    animation-delay: $i * 100ms;
+  }
+}
+
+// 动画效果
+@keyframes leftMove {
+  from {
+    left: -2000px;
+  }
+  to {
+    left: $radius;
+  }
+}
+
+@keyframes topMove {
+  from {
+    top: -2000px;
+  }
+  to {
+    top: $radius;
+  }
+}
